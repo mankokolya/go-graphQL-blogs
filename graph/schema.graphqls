@@ -1,28 +1,42 @@
-# GraphQL schema example
-#
-# https://gqlgen.com/getting-started/
+# Blog represents blog entity
 
-type Todo {
+type Blog {
   id: ID!
-  text: String!
-  done: Boolean!
-  user: User!
-}
-
-type User {
-  id: ID!
-  name: String!
+  title: String!
+  content: String!
 }
 
 type Query {
-  todos: [Todo!]!
+  # Query to get all blogs
+  blogs: [Blog!]!
+  #Query to get blog data by ID
+  blog(id: ID!): Blog!
 }
 
-input NewTodo {
-  text: String!
-  userId: String!
+#Input data for creating a new blog
+input NewBlog {
+  title: String!
+  content: String!
 }
 
+#Input data for editing a blog
+input EditBlog {
+  blogId :ID!
+  title: String!
+  content:String!
+}
+
+#Input data for deleting a blog
+input DeleteBlog {
+  blogId: ID!
+}
+
+#Mutation queries for data manipulation
 type Mutation {
-  createTodo(input: NewTodo!): Todo!
+  #create a new blog
+  newBlog(input: NewBlog!): Blog!
+  #edit a blog
+  editBlog(input: EditBlog!): Blog!
+  #delete a blog
+  deleteBlog(input: DeleteBlog!): Boolean!
 }
