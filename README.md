@@ -1,1 +1,1 @@
-# go-simple-graphql
+# go-graphql-blog
