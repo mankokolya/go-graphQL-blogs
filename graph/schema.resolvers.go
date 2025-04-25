@@ -6,34 +6,47 @@ package graph
 
 import (
 	"context"
-	"fmt"
 	"go-graphql-blog/graph/generated"
 	"go-graphql-blog/graph/model"
 )
 
 // NewBlog is the resolver for the newBlog field.
 func (r *mutationResolver) NewBlog(ctx context.Context, input model.NewBlog) (*model.Blog, error) {
-	panic(fmt.Errorf("not implemented: NewBlog - newBlog"))
+	var blog *model.Blog = r.blogService.CreateBlog(input)
+	return blog, nil
 }
 
 // EditBlog is the resolver for the editBlog field.
 func (r *mutationResolver) EditBlog(ctx context.Context, input model.EditBlog) (*model.Blog, error) {
-	panic(fmt.Errorf("not implemented: EditBlog - editBlog"))
+	blog, err := r.blogService.EditBlog(input)
+	if err != nil {
+		return &model.Blog{}, err
+	}
+
+	return blog, nil
 }
 
 // DeleteBlog is the resolver for the deleteBlog field.
 func (r *mutationResolver) DeleteBlog(ctx context.Context, input model.DeleteBlog) (bool, error) {
-	panic(fmt.Errorf("not implemented: DeleteBlog - deleteBlog"))
+	var result bool = r.blogService.DeleteBlog(input)
+	return result, nil
 }
 
 // Blogs is the resolver for the blogs field.
 func (r *queryResolver) Blogs(ctx context.Context) ([]*model.Blog, error) {
-	panic(fmt.Errorf("not implemented: Blogs - blogs"))
+	var blogs []*model.Blog = r.blogService.GetAllBlogs()
+	return blogs, nil
 }
 
 // Blog is the resolver for the blog field.
 func (r *queryResolver) Blog(ctx context.Context, id string) (*model.Blog, error) {
-	panic(fmt.Errorf("not implemented: Blog - blog"))
+	blog, err := r.blogService.GetBlogByID(id)
+
+	if err != nil {
+		return &model.Blog{}, err
+	}
+
+	return blog, nil
 }
 
 // Mutation returns generated.MutationResolver implementation.
