@@ -6,11 +6,32 @@ type Blog {
   content: String!
 }
 
+type User {
+  id: ID!
+  username: String!
+  email: String!
+  password: String!
+  createdAt: Time!
+  updatedAt: Time!
+}
+
 type Query {
   # Query to get all blogs
   blogs: [Blog!]!
   #Query to get blog data by ID
   blog(id: ID!): Blog!
+}
+
+# NewUser represents data input for creating a new username
+input NewUser {
+  username: String!
+  email: String!
+  password: String!
+}
+
+#LoginInput {
+  email: String!
+  password: String!
 }
 
 #Input data for creating a new blog
@@ -33,6 +54,11 @@ input DeleteBlog {
 
 #Mutation queries for data manipulation
 type Mutation {
+  #register to create a new user
+  register(input: NewUser!): String!
+  #Login to authenticate the user
+  login(input: LoginInput!): String!
+
   #create a new blog
   newBlog(input: NewBlog!): Blog!
   #edit a blog
