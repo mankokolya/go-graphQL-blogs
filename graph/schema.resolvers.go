@@ -6,9 +6,20 @@ package graph
 
 import (
 	"context"
+	"fmt"
 	"go-graphql-blog/graph/generated"
 	"go-graphql-blog/graph/model"
 )
+
+// Register is the resolver for the register field.
+func (r *mutationResolver) Register(ctx context.Context, input model.NewUser) (string, error) {
+	panic(fmt.Errorf("not implemented: Register - register"))
+}
+
+// Login is the resolver for the login field.
+func (r *mutationResolver) Login(ctx context.Context, input model.LoginInput) (string, error) {
+	panic(fmt.Errorf("not implemented: Login - login"))
+}
 
 // NewBlog is the resolver for the newBlog field.
 func (r *mutationResolver) NewBlog(ctx context.Context, input model.NewBlog) (*model.Blog, error) {

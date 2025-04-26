@@ -2,6 +2,10 @@
 
 package model
 
+import (
+	"time"
+)
+
 type Blog struct {
 	ID      string `json:"id"`
 	Title   string `json:"title"`
@@ -18,6 +22,11 @@ type EditBlog struct {
 	Content string `json:"content"`
 }
 
+type LoginInput struct {
+	Email    string `json:"email"`
+	Password string `json:"password"`
+}
+
 type Mutation struct {
 }
 
@@ -26,5 +35,20 @@ type NewBlog struct {
 	Content string `json:"content"`
 }
 
+type NewUser struct {
+	Username string `json:"username"`
+	Email    string `json:"email"`
+	Password string `json:"password"`
+}
+
 type Query struct {
+}
+
+type User struct {
+	ID        string     `json:"id"`
+	Username  string     `json:"username"`
+	Email     string     `json:"email"`
+	Password  string     `json:"password"`
+	CreatedAt time.Time  `json:"createdAt"`
+	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
 }

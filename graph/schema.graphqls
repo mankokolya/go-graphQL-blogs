@@ -1,3 +1,5 @@
+scalar Time
+
 # Blog represents blog entity
 
 type Blog {
@@ -12,7 +14,7 @@ type User {
   email: String!
   password: String!
   createdAt: Time!
-  updatedAt: Time!
+  updatedAt: Time
 }
 
 type Query {
@@ -29,7 +31,8 @@ input NewUser {
   password: String!
 }
 
-#LoginInput {
+#LoginInput 
+input LoginInput {
   email: String!
   password: String!
 }
