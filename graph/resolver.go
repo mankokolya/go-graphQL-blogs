@@ -8,4 +8,6 @@ import "go-graphql-blog/graph/service"
 
 type Resolver struct {
 	blogService service.BlogService
+
+	userService service.UserService
 }
