@@ -6,6 +6,9 @@ type Blog {
   id: ID!
   title: String!
   content: String!
+  author: User
+  createdAt: Time!
+  updatedAt: Time
 }
 
 type User {
