@@ -6,6 +6,7 @@ package graph
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"go-graphql-blog/graph/generated"
 	"go-graphql-blog/graph/model"
@@ -23,13 +24,29 @@ func (r *mutationResolver) Login(ctx context.Context, input model.LoginInput) (s
 
 // NewBlog is the resolver for the newBlog field.
 func (r *mutationResolver) NewBlog(ctx context.Context, input model.NewBlog) (*model.Blog, error) {
-	var blog *model.Blog = r.blogService.CreateBlog(input)
+	user := &model.User{ID: "1"}
+	if user == nil {
+		return &model.Blog{}, errors.New("access denied")
+	}
+
+	blog, err := r.blogService.CreateBlog(input, *user)
+
+	if err != nil {
+		return nil, err
+	}
+
 	return blog, nil
 }
 
 // EditBlog is the resolver for the editBlog field.
 func (r *mutationResolver) EditBlog(ctx context.Context, input model.EditBlog) (*model.Blog, error) {
-	blog, err := r.blogService.EditBlog(input)
+	user := &model.User{ID: "1"}
+	if user == nil {
+		return &model.Blog{}, errors.New("access denied")
+	}
+
+	blog, err := r.blogService.EditBlog(input, *user)
+
 	if err != nil {
 		return &model.Blog{}, err
 	}
@@ -39,7 +56,13 @@ func (r *mutationResolver) EditBlog(ctx context.Context, input model.EditBlog) (
 
 // DeleteBlog is the resolver for the deleteBlog field.
 func (r *mutationResolver) DeleteBlog(ctx context.Context, input model.DeleteBlog) (bool, error) {
-	var result bool = r.blogService.DeleteBlog(input)
+	user := &model.User{ID: "1"}
+	if user == nil {
+		return false, errors.New("access denied")
+	}
+
+	var result bool = r.blogService.DeleteBlog(input, *user)
+
 	return result, nil
 }
 
