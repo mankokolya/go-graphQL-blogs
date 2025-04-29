@@ -8,6 +8,7 @@ import (
 	"context"
 	"errors"
 	"go-graphql-blog/graph/generated"
+	"go-graphql-blog/graph/middleware"
 	"go-graphql-blog/graph/model"
 )
 
@@ -35,7 +36,8 @@ func (r *mutationResolver) Login(ctx context.Context, input model.LoginInput) (s
 
 // NewBlog is the resolver for the newBlog field.
 func (r *mutationResolver) NewBlog(ctx context.Context, input model.NewBlog) (*model.Blog, error) {
-	user := &model.User{ID: "1"}
+	user := middleware.ForContext(ctx)
+
 	if user == nil {
 		return &model.Blog{}, errors.New("access denied")
 	}
@@ -51,7 +53,8 @@ func (r *mutationResolver) NewBlog(ctx context.Context, input model.NewBlog) (*m
 
 // EditBlog is the resolver for the editBlog field.
 func (r *mutationResolver) EditBlog(ctx context.Context, input model.EditBlog) (*model.Blog, error) {
-	user := &model.User{ID: "1"}
+	user := middleware.ForContext(ctx)
+
 	if user == nil {
 		return &model.Blog{}, errors.New("access denied")
 	}
@@ -67,7 +70,7 @@ func (r *mutationResolver) EditBlog(ctx context.Context, input model.EditBlog) (
 
 // DeleteBlog is the resolver for the deleteBlog field.
 func (r *mutationResolver) DeleteBlog(ctx context.Context, input model.DeleteBlog) (bool, error) {
-	user := &model.User{ID: "1"}
+	user := middleware.ForContext(ctx)
 	if user == nil {
 		return false, errors.New("access denied")
 	}
