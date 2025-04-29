@@ -4,8 +4,8 @@ go 1.24.1
 
 require (
 	github.com/99designs/gqlgen v0.17.72
+	github.com/go-chi/chi/v5 v5.2.1
 	github.com/golang-jwt/jwt/v4 v4.5.2
-	github.com/google/uuid v1.6.0
 	github.com/joho/godotenv v1.5.1
 	github.com/vektah/gqlparser/v2 v2.5.25
 	go.mongodb.org/mongo-driver v1.17.3
@@ -16,6 +16,7 @@ require (
 	github.com/agnivade/levenshtein v1.2.1 // indirect
 	github.com/go-viper/mapstructure/v2 v2.2.1 // indirect
 	github.com/golang/snappy v1.0.0 // indirect
+	github.com/google/uuid v1.6.0 // indirect
 	github.com/gorilla/websocket v1.5.0 // indirect
 	github.com/hashicorp/golang-lru/v2 v2.0.7 // indirect
 	github.com/klauspost/compress v1.16.7 // indirect
